@@ -69,4 +69,4 @@ theme: next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:zivyu/zivyu.github.com.git
+  repo: git@github.com:zivyu/zivyu.github.io.git
