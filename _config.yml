@@ -3,11 +3,11 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: DanDan的学习笔记
 subtitle:
-description:
-author: John Doe
-language:
+description: 爱生活，爱学习，爱旅行。
+author: DanDan
+language: zh-Hans
 timezone:
 
 # URL
@@ -63,9 +63,10 @@ pagination_dir: page
 # Extensions
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
-theme: landscape
+theme: next
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
-  type:
+  type: git
+  repo: git@github.com:zivyu/zivyu.github.com.git
