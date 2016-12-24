@@ -70,3 +70,7 @@ theme: next
 deploy:
   type: git
   repo: git@github.com:zivyu/zivyu.github.io.git
+
+baidu_analytics: ec91f39600049a481c2c32d404e8d3cc
+duoshuo_shortname: zivyu
+
