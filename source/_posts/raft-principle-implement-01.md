@@ -4,7 +4,7 @@ date: 2016-12-21 22:45:37
 categories:
 - Raft原理与实现
 tags:
-- Raft
+- Raft 分布式
 ---
 
 ## Raft是什么
