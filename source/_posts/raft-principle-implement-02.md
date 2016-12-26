@@ -4,6 +4,11 @@ date: 2016-12-26 12:02:33
 categories:
 - Raft原理与实现
 tags:
-- Raft 分布式
+- Raft 
+- 分布式
 ---
+
+## Safety
+
+
 
