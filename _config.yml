@@ -74,3 +74,5 @@ deploy:
 baidu_analytics: ec91f39600049a481c2c32d404e8d3cc
 duoshuo_shortname: zivyu
 
+sitemap:
+  path: sitemap.xml 
