@@ -408,7 +408,25 @@
 <p>大于T的leader的所有term必须包含了所有在term T被提交的entries。</p>
 <p><img src="/images/raft_safy_02.png" alt=""></p>
 <p>如上图，如果S1在当前term提交了一个新的log entry，对于随后的term U，S5被选为leader，这时候必须有一个S3接受了这个log entry，并且给S5投票。</p>
-<h2 id="Cluster-membership-changes"><a href="#Cluster-membership-changes" class="headerlink" title="Cluster membership changes"></a>Cluster membership changes</h2><p>到目前为止，我们认为</p>
+<h2 id="Cluster-membership-changes"><a href="#Cluster-membership-changes" class="headerlink" title="Cluster membership changes"></a>Cluster membership changes</h2><p>到目前为止，我们都假设集群中的server是固定的。但是在实际生产中，我们偶尔会变更集群配置，比如说替换到宕机的server。最简单的方式就是停掉整个集群，然后更新配置文件，然后重启集群，但是这会造成集群在短时间内不可用。</p>
+<p>想要安全的更新配置文件，必须保证在集群转换期间的同一个term内不可能会出现两个leader。如下图，把配置文件直接替换成新的是不安全的，可能会出现两个leader。</p>
+<p><img src="/images/raft_member_change_01.png" alt=""></p>
+<p>为了确保安全，配置变更必须使用两阶段的方式。</p>
+<p>在Raft中，集群首先转换到称为<em>joint consensus</em>的状态，一旦joint consensus被committed，系统就开始使用新的配置文件。</p>
+<p>joint consensus将旧的和新的配置文件联系起来了：</p>
+<ul>
+<li>Log entries被复制到所有的集群中。包括新、旧配置文件。</li>
+<li>来自任何一份配置总的server可能会是leader</li>
+<li>对于选举和entry，都需要新和旧的多数派的同意。</li>
+</ul>
+<p>集群配置使用特殊的log entries来存储，当leader收到一个将C old转换到C new的请求的时候，它就作为joint consensus来保存这个配置，并使用之前的机制来复制该log entry。一旦一个server将new configuration增加到它的log之后，后面所有的决策，它就使用该configuration。这意味着leader使用C old,new来决定对于C old,new的log entry是否被提交。如果leader宕机，一个新的leader要么在C old，要么在C old,new下被选择。任何情况下，C new都不可能做出单边决议。</p>
+<p>一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，    现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old可以做出单边决议。</p>
+<p><img src="/images/raft_member_change02.png" alt=""></p>
+<p>如上图，leader首先创建C old,new ，被提交之后，再创建C new 然后把它提交到C new中的多数。在任意时间点，C old和 C new都不能同时独立的做出决议。</p>
+<p>更新配置的时候，有三个主要的问题。</p>
+<p>第一个问题是新的server可能没有初始化log entries。当他们加入集群的时候，需要花一段时间来追上最新的数据，在这段时间，它可能不会提交新的log entry。为了避免这个问题，Raft在配置变更前引入了一个新的阶段，新的server加入集群的时候，是作为一个non-voting成员，意思是leader仅仅是复制日志给他们，而不把他们作为大多数考虑。直到该server追上leader的log。</p>
+<p>第二个问题是集群的leader可能并在新的配置中。在这种情况下，一旦它提交了C new，就主动下线。</p>
+<p>第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，server会忽视RequestVote<br>RPCs，当这个server确信当前的leader存在的时候。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。</p>
 
           
         
