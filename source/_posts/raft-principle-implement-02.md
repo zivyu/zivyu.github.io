@@ -16,8 +16,7 @@ tags:
 
 Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。
 
-Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The
-RequestVote RPC来实现的：
+Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The RequestVote RPC来实现的：
 
 - RPC包含了candidate的log
 - 如果voter发现自己的log比candidate的log 更新，就拒绝这个投票。
@@ -85,7 +84,7 @@ joint consensus将旧的和新的配置文件联系起来了：
 
 集群配置使用特殊的log entries来存储，当leader收到一个将C old转换到C new的请求的时候，它就作为joint consensus来保存这个配置，并使用之前的机制来复制该log entry。一旦一个server将new configuration增加到它的log之后，后面所有的决策，它就使用该configuration。这意味着leader使用C old,new来决定对于C old,new的log entry是否被提交。如果leader宕机，一个新的leader要么在C old，要么在C old,new下被选择。任何情况下，C new都不可能做出单边决议。
 
-一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，	现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old可以做出单边决议。
+一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，	现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old都不可以同时做出单边决议。
 
 ![](/images/raft_member_change02.png)
 
@@ -97,5 +96,4 @@ joint consensus将旧的和新的配置文件联系起来了：
 
 第二个问题是集群的leader可能并在新的配置中。在这种情况下，一旦它提交了C new，就主动下线。
 
-第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，server会忽视RequestVote
-RPCs，当这个server确信当前的leader存在的时候。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。
+第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，当这个server确信当前的leader存在的时候，server会忽视RequestVote RPCs。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。
