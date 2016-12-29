@@ -1,5 +1,10 @@
 ---
-title: raft-principle-implement-03
+title: Raft原理与实现（三）：日志压缩
 date: 2016-12-28 22:00:16
+categories:
+- Raft原理与实现
 tags:
+- Raft 
+- 分布式
 ---
+这一节是要是日志压缩和客户端交互的部分，先略过。如果能实现一、二篇所描述的部分，再来实现本节。
