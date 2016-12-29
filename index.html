@@ -269,6 +269,129 @@
   
 
   <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/28/raft-principle-implement-03/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DanDan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/jiqimao02.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="DanDan的学习笔记">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                
+                <a class="post-title-link" href="/2016/12/28/raft-principle-implement-03/" itemprop="url">
+                  raft-principle-implement-03
+                </a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-28T22:00:16+08:00">
+                2016-12-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/28/raft-principle-implement-03/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/raft-principle-implement-03/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            
+          
+        
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+    <div>
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
   <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/26/raft-principle-implement-02/">
 
   <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -374,7 +497,7 @@
           
             <h2 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h2><p>之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。</p>
 <h3 id="Election-restriction"><a href="#Election-restriction" class="headerlink" title="Election restriction"></a>Election restriction</h3><p>Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。</p>
-<p>Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The<br>RequestVote RPC来实现的：</p>
+<p>Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The RequestVote RPC来实现的：</p>
 <ul>
 <li>RPC包含了candidate的log</li>
 <li>如果voter发现自己的log比candidate的log 更新，就拒绝这个投票。</li>
@@ -420,13 +543,13 @@
 <li>对于选举和entry，都需要新和旧的多数派的同意。</li>
 </ul>
 <p>集群配置使用特殊的log entries来存储，当leader收到一个将C old转换到C new的请求的时候，它就作为joint consensus来保存这个配置，并使用之前的机制来复制该log entry。一旦一个server将new configuration增加到它的log之后，后面所有的决策，它就使用该configuration。这意味着leader使用C old,new来决定对于C old,new的log entry是否被提交。如果leader宕机，一个新的leader要么在C old，要么在C old,new下被选择。任何情况下，C new都不可能做出单边决议。</p>
-<p>一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，    现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old可以做出单边决议。</p>
+<p>一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，    现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old都不可以同时做出单边决议。</p>
 <p><img src="/images/raft_member_change02.png" alt=""></p>
 <p>如上图，leader首先创建C old,new ，被提交之后，再创建C new 然后把它提交到C new中的多数。在任意时间点，C old和 C new都不能同时独立的做出决议。</p>
 <p>更新配置的时候，有三个主要的问题。</p>
 <p>第一个问题是新的server可能没有初始化log entries。当他们加入集群的时候，需要花一段时间来追上最新的数据，在这段时间，它可能不会提交新的log entry。为了避免这个问题，Raft在配置变更前引入了一个新的阶段，新的server加入集群的时候，是作为一个non-voting成员，意思是leader仅仅是复制日志给他们，而不把他们作为大多数考虑。直到该server追上leader的log。</p>
 <p>第二个问题是集群的leader可能并在新的配置中。在这种情况下，一旦它提交了C new，就主动下线。</p>
-<p>第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，server会忽视RequestVote<br>RPCs，当这个server确信当前的leader存在的时候。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。</p>
+<p>第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，当这个server确信当前的leader存在的时候，server会忽视RequestVote RPCs。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。</p>
 
           
         
@@ -899,7 +1022,7 @@
         <nav class="site-state motion-element">
           <div class="site-state-item site-state-posts">
             <a href="/archives">
-              <span class="site-state-item-count">3</span>
+              <span class="site-state-item-count">4</span>
               <span class="site-state-item-name">日志</span>
             </a>
           </div>
