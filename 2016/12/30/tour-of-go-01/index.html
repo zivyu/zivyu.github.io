@@ -68,7 +68,7 @@
 <link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="Go,编程语言," />
 
 
 
@@ -84,15 +84,25 @@
 
 
 
-<meta name="description" content="爱生活，爱学习，爱旅行。">
-<meta property="og:type" content="website">
-<meta property="og:title" content="DanDan的学习笔记">
-<meta property="og:url" content="https://zivyu.github.io/index.html">
+<meta name="description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。
+Hello,world!1234567package mainimport">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Tour of Go（一）：基本知识">
+<meta property="og:url" content="https://zivyu.github.io/2016/12/30/tour-of-go-01/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="爱生活，爱学习，爱旅行。">
+<meta property="og:description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。
+Hello,world!1234567package mainimport">
+<meta property="og:updated_time" content="2016-12-30T10:11:43.660Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DanDan的学习笔记">
-<meta name="twitter:description" content="爱生活，爱学习，爱旅行。">
+<meta name="twitter:title" content="A Tour of Go（一）：基本知识">
+<meta name="twitter:description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。
+Hello,world!1234567package mainimport">
 
 
 
@@ -120,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="https://zivyu.github.io/"/>
+  <link rel="canonical" href="https://zivyu.github.io/2016/12/30/tour-of-go-01/"/>
 
 
 
 
 
-  <title> DanDan的学习笔记 </title>
+  <title> A Tour of Go（一）：基本知识 | DanDan的学习笔记 </title>
 </head>
 
 <body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
@@ -157,9 +167,7 @@
     
   
 
-  <div class="container one-collumn sidebar-position-left 
-   page-home 
- ">
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -258,9 +266,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -293,10 +301,7 @@
             
             
               
-                
-                <a class="post-title-link" href="/2016/12/30/tour-of-go-01/" itemprop="url">
-                  A Tour of Go（一）：基本知识
-                </a>
+                A Tour of Go（一）：基本知识
               
             
           </h1>
@@ -370,9 +375,7 @@
       
 
       
-        
-          
-            <p>在正式开始Mit 6.824之前，我先按照<a href="https://golang.org/doc/#go_tour" target="_blank" rel="external">A Tour of Go</a> ，学习Go语言的语法和相关知识。</p>
+        <p>在正式开始Mit 6.824之前，我先按照<a href="https://golang.org/doc/#go_tour" target="_blank" rel="external">A Tour of Go</a> ，学习Go语言的语法和相关知识。</p>
 <p>A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。</p>
 <p>本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。</p>
 <h2 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello,world!"></a>Hello,world!</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"Hello, 世界"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
@@ -561,758 +564,64 @@ b = b[1:]      // len(b)=4, cap(b)=4
 <p>如下的例子，<code>adder</code>方法返回一个闭包。每个闭包绑定在它自己的变量<code>sum</code>上。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">adder</span><span class="params">()</span> <span class="title">func</span><span class="params">(<span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</div><div class="line">	sum := <span class="number">0</span></div><div class="line">	<span class="keyword">return</span> <span class="function"><span class="keyword">func</span><span class="params">(x <span class="keyword">int</span>)</span> <span class="title">int</span></span> &#123;</div><div class="line">		sum += x</div><div class="line">		<span class="keyword">return</span> sum</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	pos, neg := adder(), adder()</div><div class="line">	<span class="keyword">for</span> i := <span class="number">0</span>; i &lt; <span class="number">10</span>; i++ &#123;</div><div class="line">		fmt.Println(</div><div class="line">			pos(i),</div><div class="line">			neg(<span class="number">-2</span>*i),</div><div class="line">		)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
-          
+      
+    </div>
+
+    <div>
+      
         
+
       
     </div>
 
     <div>
       
-    </div>
+        
 
-    <div>
       
     </div>
 
 
     <footer class="post-footer">
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/28/raft-principle-implement-03/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DanDan">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/jiqimao02.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="DanDan的学习笔记">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/28/raft-principle-implement-03/" itemprop="url">
-                  raft-principle-implement-03
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-28T22:00:16+08:00">
-                2016-12-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-
+            <a href="/tags/Go/" rel="tag"># Go</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/28/raft-principle-implement-03/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/28/raft-principle-implement-03/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
           
-
-          
-
-          
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
             
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/26/raft-principle-implement-02/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DanDan">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/jiqimao02.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="DanDan的学习笔记">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
+              <a href="/2016/12/28/raft-principle-implement-03/" rel="next" title="raft-principle-implement-03">
+                <i class="fa fa-chevron-left"></i> raft-principle-implement-03
+              </a>
             
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
             
-              
-                
-                <a class="post-title-link" href="/2016/12/26/raft-principle-implement-02/" itemprop="url">
-                  Raft原理与实现（二）：安全性与成员变更
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-26T12:02:33+08:00">
-                2016-12-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Raft原理与实现/" itemprop="url" rel="index">
-                    <span itemprop="name">Raft原理与实现</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/26/raft-principle-implement-02/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/26/raft-principle-implement-02/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          
-            <h2 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h2><p>之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。</p>
-<h3 id="Election-restriction"><a href="#Election-restriction" class="headerlink" title="Election restriction"></a>Election restriction</h3><p>Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。</p>
-<p>Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The RequestVote RPC来实现的：</p>
-<ul>
-<li>RPC包含了candidate的log</li>
-<li>如果voter发现自己的log比candidate的log 更新，就拒绝这个投票。</li>
-</ul>
-<p>Raft通过比较log中最新的entries的index和term来决定哪个更新。如果最新的entries有不同的term，则更大的term是更新的，如果有相同的term，谁的log更多，谁就是更新的。</p>
-<h3 id="Committing-entries-from-previous-terms"><a href="#Committing-entries-from-previous-terms" class="headerlink" title="Committing entries from previous terms"></a>Committing entries from previous terms</h3><p>当entry被复制到集群中大多数的时候，leader就知道这个entry是committed。如果leader在committing一个entry的时候cash了，随后的leader将会尝试完成这个entry的复制。但是一个leader不能立即推断出一个之前的term的entry是否是committed，即使这个entry被保存在了集群中的大多数server中。</p>
-<p>如下图就展示了这种情况：一个老的entry已经被保存在了大多数server中，但是仍然被后面的leader给重写了。</p>
-<p><img src="/images/raft_safy_r.png" alt=""></p>
-<p>如上图：</p>
-<ul>
-<li>在（a）中，S1当选为leader，然后在index=2复制了部分log entry。</li>
-<li>在（b）中，S1宕机，S5获得了来自S3、S4和它自己的投票，然后当选为leader，并在index=2写入了一个不同的entry。</li>
-<li>在（c）中，S5宕机，S1重启之后当选为leader，然后开始复制log entry。这时候，来自term=2的log已经被复制到了大多数机器中，但是它还没有被committed。</li>
-<li>在（d）中，由于S1宕机，S5获得了来自 S2， S3和S4的投票，然后从term=3开始重写entry。</li>
-<li>在（e）中，如果S1在宕机之前把当前term的一个entry复制到大多数server中，并且这个entry被提交，这时候S5就不可能赢得选举。在这个点，所有之前的entry也被提交。</li>
-</ul>
-<p>为了消除上图中这种情况，Raft永远不会通过副本数来commit之前term的log entries。只有当前term的log entries才会通过计算副本数被commit。并且一旦当前term的entriy被committed，根据 Log Matching Property，所有之前的log entries也会被提交。</p>
-<h3 id="Safety-argument"><a href="#Safety-argument" class="headerlink" title="Safety argument"></a>Safety argument</h3><p>通过之前的选举和日志复制，然后再加上上面的限制。完整的Raft算法已经描述完了。现在来证明 Leader Completeness Property。</p>
-<p>现在假设leader在term T 提交了一个当前term的log entry，但是这个log entry在随后的term没有被leader保存。</p>
-<p>假设term U是大于term T的最小的term，并且term U的leader没有包含这个log entry。</p>
-<ol>
-<li>被提交的entry在leader U选举的时候肯定没有被保存在log中。因为leader不会删除或覆盖自己的log。</li>
-<li>leader T把这个entry复制到集群中的大多数，并且leader U收到了来自集群中大多数server的投票。因此，至少有一个server（voter）收到了来自leader T的entry，并且给leader U投了票。像下图所示，这个server就是一个矛盾点。</li>
-<li>voter必须在给leader U投票之前收到了被leader T提交的entry。否则它会拒绝来自leader T的AppendEntries请求，因为它当前的term比T的高。</li>
-<li>当voter投票给leader U的时候，它仍然保存着这个entry。因为每个中间的leader都包含了这个entry，leader永远不会移除entries，并且follower只会移除和leader冲突的entries。</li>
-<li>voter将票投给了leader U，所以leader U的log必须和voter至少是一样新的。这就导致了两个矛盾。</li>
-<li>首先，如果voter和leader U有相同的最新的entry，leader U的log要至少和voter的log一样长，所以它的log包含了voter的log的每个entry。这就是一个矛盾。</li>
-<li>leader U 最新的log entry的term必须大于voter的log entry。此外，它会大于T，因为voter的最新的log至少是T。</li>
-<li>因此，假设不成立。</li>
-</ol>
-<p>大于T的leader的所有term必须包含了所有在term T被提交的entries。</p>
-<p><img src="/images/raft_safy_02.png" alt=""></p>
-<p>如上图，如果S1在当前term提交了一个新的log entry，对于随后的term U，S5被选为leader，这时候必须有一个S3接受了这个log entry，并且给S5投票。</p>
-<h2 id="Cluster-membership-changes"><a href="#Cluster-membership-changes" class="headerlink" title="Cluster membership changes"></a>Cluster membership changes</h2><p>到目前为止，我们都假设集群中的server是固定的。但是在实际生产中，我们偶尔会变更集群配置，比如说替换到宕机的server。最简单的方式就是停掉整个集群，然后更新配置文件，然后重启集群，但是这会造成集群在短时间内不可用。</p>
-<p>想要安全的更新配置文件，必须保证在集群转换期间的同一个term内不可能会出现两个leader。如下图，把配置文件直接替换成新的是不安全的，可能会出现两个leader。</p>
-<p><img src="/images/raft_member_change_01.png" alt=""></p>
-<p>为了确保安全，配置变更必须使用两阶段的方式。</p>
-<p>在Raft中，集群首先转换到称为<em>joint consensus</em>的状态，一旦joint consensus被committed，系统就开始使用新的配置文件。</p>
-<p>joint consensus将旧的和新的配置文件联系起来了：</p>
-<ul>
-<li>Log entries被复制到所有的集群中。包括新、旧配置文件。</li>
-<li>来自任何一份配置总的server可能会是leader</li>
-<li>对于选举和entry，都需要新和旧的多数派的同意。</li>
-</ul>
-<p>集群配置使用特殊的log entries来存储，当leader收到一个将C old转换到C new的请求的时候，它就作为joint consensus来保存这个配置，并使用之前的机制来复制该log entry。一旦一个server将new configuration增加到它的log之后，后面所有的决策，它就使用该configuration。这意味着leader使用C old,new来决定对于C old,new的log entry是否被提交。如果leader宕机，一个新的leader要么在C old，要么在C old,new下被选择。任何情况下，C new都不可能做出单边决议。</p>
-<p>一旦C old,new被提交，只有C old,new的server才能被选举为leader。对于leader来说，现在创建一个C new并复制给server是安全的。当C new被提交之后，    现在就可以安全的下线新的配置中不存在的机器。如下图，任何时间点，C new 和 C old都不可以同时做出单边决议。</p>
-<p><img src="/images/raft_member_change02.png" alt=""></p>
-<p>如上图，leader首先创建C old,new ，被提交之后，再创建C new 然后把它提交到C new中的多数。在任意时间点，C old和 C new都不能同时独立的做出决议。</p>
-<p>更新配置的时候，有三个主要的问题。</p>
-<p>第一个问题是新的server可能没有初始化log entries。当他们加入集群的时候，需要花一段时间来追上最新的数据，在这段时间，它可能不会提交新的log entry。为了避免这个问题，Raft在配置变更前引入了一个新的阶段，新的server加入集群的时候，是作为一个non-voting成员，意思是leader仅仅是复制日志给他们，而不把他们作为大多数考虑。直到该server追上leader的log。</p>
-<p>第二个问题是集群的leader可能并在新的配置中。在这种情况下，一旦它提交了C new，就主动下线。</p>
-<p>第三个问题被移除的server可能会影响集群。这些被下线的机器不再受到心跳信息，然后他们开始了一轮选举。它们会发送RequestVote RPCs，并带上新的term，这会使leader转换到follower状态。一个新的leader会被选举出来，但是被移除的server又会time out，然后开始选举。为了解决这个问题，当这个server确信当前的leader存在的时候，server会忽视RequestVote RPCs。具体来说，如果一个server收到了当前leader的心跳之后的最小time out时间内收到了一个RequestVote RPC要求投票，它不会更新它的term，也不会进行投票。这不会影响正常的选举，因为每个server在选举之前至少等待最小 election timeout。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </article>
 
 
-    
-      
 
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/21/raft-principle-implement-01/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DanDan">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/jiqimao02.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="DanDan的学习笔记">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/21/raft-principle-implement-01/" itemprop="url">
-                  Raft原理与实现（一）：简介、选举与日志复制
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-21T22:45:37+08:00">
-                2016-12-21
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Raft原理与实现/" itemprop="url" rel="index">
-                    <span itemprop="name">Raft原理与实现</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/21/raft-principle-implement-01/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/21/raft-principle-implement-01/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <h2 id="Raft是什么"><a href="#Raft是什么" class="headerlink" title="Raft是什么"></a>Raft是什么</h2><p>Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一致性的约束来减少需要考虑的状态数目。</p>
-<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>一致性算法允许一组机器一起工作来应对某些机器宕机。在过去十来年，Paxos一直在这方面占主导地位：许多实现都是基于Paxos，或受Paxos的影响。但是，Paxos实在是太难懂了，此外，还需要一些复杂的改变来支持实际的应用。</p>
-<p>在与Paxos做了一番斗争之后，我们提出了一个新的一致性算法，这个算法就叫Raft，并且它的首先目标就是要容易理解。</p>
-<p>Raft有几个特性：</p>
-<ul>
-<li>Strong leader：相比其他协议，Raft对leadership作出了更强的约束，比如说：日志只能从leader流向其他servers。</li>
-<li>Leader election：Raft使用随机的时间来选举leader。</li>
-<li>Membership changes：Raft使用了一个joint consensus方式来应对成员变更。这让整个集群在成员变更期间依然能提供服务。</li>
-</ul>
-<h2 id="Replicated-state-machines"><a href="#Replicated-state-machines" class="headerlink" title="Replicated state machines"></a>Replicated state machines</h2><p>在分布式系统中，使用Replicated state machines来解决各种各样的故障容错问题。</p>
-<p>Replicated state machines使用replicated log来实现，每个server存储一系列的commands，这些commands将会被状态机有序执行。每个log都会以相同的顺序存储相同的command。</p>
-<p>一致性算法是的工作就是保证replicated log的一致性。</p>
-<p>对于一个实际的系统，一致性算法有下列属性：</p>
-<ul>
-<li>safety：不会返回一个错误的结果。</li>
-<li>available： 大多数server可用的情况下，系统就是可用的。</li>
-<li>不依赖时钟来确保log的一致性</li>
-<li>当集群中的大多数机器能工作时，少数机器不会影响整个集群的性能。</li>
-</ul>
-<p>如下图，是一个Replicated state machines的结构：</p>
-<p><img src="/images/raft_state_machine.png" alt=""></p>
-<p>如图所示，一致性算法管理着一个 replicated log，该log包含了来自客户端的状态机命令。不同server的状态机都会从log中执行相同的command序列，所以会输出相同的结果。</p>
-<h2 id="What’s-wrong-with-Paxos"><a href="#What’s-wrong-with-Paxos" class="headerlink" title="What’s wrong with Paxos?"></a>What’s wrong with Paxos?</h2><p>Paxos有两个主要的缺点：</p>
-<ul>
-<li>第一是Paxos实在是太难懂了。</li>
-<li>第二是Paxos没有给一个工程实现提供基础。Lamport大师本人对multi-Paxos做了大概的描述，但缺少了很多细节。</li>
-</ul>
-<h2 id="Designing-for-understandability"><a href="#Designing-for-understandability" class="headerlink" title="Designing for understandability"></a>Designing for understandability</h2><p>Raft的几个目标：</p>
-<ul>
-<li>对于工程实现，提供完整的和实用基础。</li>
-<li>安全性和可用性</li>
-<li>高效性</li>
-</ul>
-<p>Raft还有一个最最重要的目标：<strong><em>understandability</em></strong>。</p>
-<p>Raft采用了两种方式来让读者可理解：</p>
-<ul>
-<li>问题分解：比如说在Raft中有leader选举、log复制、safty和成员变更。</li>
-<li>简化状态空间：减少要考虑的状态，比如说log不允许有日志空洞、</li>
-</ul>
-<h2 id="The-Raft-consensus-algorithm"><a href="#The-Raft-consensus-algorithm" class="headerlink" title="The Raft consensus algorithm"></a>The Raft consensus algorithm</h2><p>Raft首先选举出一个leader，然后让leader来管理复制日志。拥有leader极大的简化了复制日志管理。</p>
-<p>通过leader的方式，Raft把一致性问题分解为三个独立的子问题：</p>
-<ol>
-<li>Leader election：必须有个leader。</li>
-<li>Log replication：leader从客户端接受日志，并复制到集群中其他server上。</li>
-<li>Safety：如果一个server应用了一个log entry到它的状态机中，对于相同的log index，其他的server不可能执行不同的command。</li>
-</ol>
-<h3 id="Raft-basics"><a href="#Raft-basics" class="headerlink" title="Raft basics"></a>Raft basics</h3><p>集群中的每个server只有三种状态：leader, follower, 或 candidate。正常情况下有一个唯一的leader，其他的server都是follower。follower只能响应leader或candidates的请求，leader处理所有的客户端请求，candidate是用来选举。下图展示了这几种状态之间的转换：</p>
-<p><img src="/images/raft_state_transitions.png" alt=""></p>
-<p>Raft将时间划分为term，如下图所示。</p>
-<p><img src="/images/raft_term.png" alt=""></p>
-<p>每个term以一次选举开始。如果一个candidate赢得了选举，它就作为剩下term的leader。</p>
-<p>term是一个逻辑时钟，每个server都会存储当前的term number，当server之间交换信息的时候，当前的term会被带上。如果一个server的当前term小于其他的server，它就把当前term更新。如果一个candidate或leader发现它的term已经过期，就立刻转换为follower状态。如果一个server收到一个过时的term的请求，则会拒绝这个请求。</p>
-<p>Raft使用RPC来互相交流，并且只需要两种RPC请求：</p>
-<ol>
-<li>RequestVote RPC：在选举的时候使用。</li>
-<li>AppendEntries RPC：leader进行日志复制和心跳信息的时候使用。</li>
-</ol>
-<h3 id="Leader-election"><a href="#Leader-election" class="headerlink" title="Leader election"></a>Leader election</h3><p>Raft使用心跳机制来触发选举。当一个server启动的时候，它是follower状态，只要server从leader或candidate收到有效的RPC，它就一直保持这种状态。leader定时发送心跳信息给集群中的大多数。如果一个follower在 election timeout时间内没收到信息，它就认为leader宕机，并开始一轮新的选举。</p>
-<p>当开始选举的时候，follower增加当前的term，然后转换到candidate状态。然后给自己投票，同时发出一个RequestVote RPC给集群中的其他机器。这个server会一直保持candidate状态，直到发生下列三件事中的一件事：</p>
-<ol>
-<li>该server赢得了选举</li>
-<li>其他的server当选为leader</li>
-<li>一段时间后还是没有选出leader</li>
-</ol>
-<p>如果一个candidate在当前term内赢得了集群中大多数的机器的投票，它就当选为leader。在一个给定的term，每个server最多只能投一票，并且按照先谁来救投给谁的原则进行投票。大多数原则保证了在一个term中，最多只能有一个candidate可以赢得选举。</p>
-<p>如果在等待投票的时候，一个candidate从别的server收到一个AppendEntries RPC说它是leader，如果leader的term大于或等于当前server的term，该candidate就意识到这个leader是合法的，然后转换到follower状态。如果RPC中的term小于当前server的term，该candidate会拒绝这个PRC，并继续保持candidate状态。</p>
-<p>第三种情况发生在一个candidate既没有赢得选举，也没有丢失选举的情况下：如果多个server同时成为了candidate，将不会有candidate赢得大多数。当发生这种情况的时候，每个candidate将会time out，然后开始一轮新的选举。注意的是，如果没有一些额外的措施，可能这种情况会一直重复下去。</p>
-<p>Raft使用随机的election timeout来保证不会发生上诉情况。Raft的election time从一个固定区间中（如150-300ms）选择一个值，这样，大多数情况下，只有一个server会time out，然后它赢得选举，并在其他server time out之前发送心跳。</p>
-<h3 id="Log-replication"><a href="#Log-replication" class="headerlink" title="Log replication"></a>Log replication</h3><p>一旦一个leader被选举出来，它就开始处理客户端请求。每个客户端请求都会包含一个被状态机执行的command。leader把这个command作为一个新的entry追加到log中，然后同时发送AppendEntries RPCs给其他的server来复制这个entry。当entry被安全的复制之后，leader就会把这个command应用于状态机，然后将执行结果返回给client。如果followers宕机或run slowly，或网络丢包的时候，leader会重试AppendEntries RPCs 直到所有的followers保存了所有的log entries。</p>
-<p>Logs像下图一样被组织起来。</p>
-<p><img src="/images/raft_log.png" alt=""></p>
-<p>如图所示，Logs由entries组成，每个entry包含它被创建的term，还包含一个command。term用来检查log的不一致。每个log entry也包含一个整数index用来标识他在log中的位置。</p>
-<p>leader来决定什么时候把一个log entry应用到状态机上是安全的，这样的entry被称为committed。Raft保证了committed entries是被持久化并最终被所有可用的状态机应用。一个log entry就被committed当创建这个log entry的leader把它复制到到集群中的大多数机器中的时候。这也会commit该leader的log中的之前的entries，包括了之前的leader创建的entries。leader追踪着它知道的已经被committed的entry的最大的index，并在之后的AppendEntries RPCs中带上这个index，一旦一个follower知道一个log entry已经被committed，它就把这个entry应用于状态机。</p>
-<p>Raft设计了一种机制，来让不同的server中的log保持一致。</p>
-<p>Raft维护了下列属性</p>
-<p>a. 在不同的logs中，如果两个entries有相同的index和term，则它们保存了相同的command。<br>b. 如果在不同的log中，两个entries有相同的index和term，那么这些logs之前所有的entries也保持一致。</p>
-<p>属性一通过下列条件保证：</p>
-<ul>
-<li>一个leader在一个给定的term中，一个log index最多只创建一个entry。</li>
-<li>log entries永远不会改变它们在log中位置。</li>
-</ul>
-<p>属性二通过执行一个一致性检查来保证。</p>
-<ul>
-<li>当发送一个AppendEntries RPC的时候，leader会包含比这个最新的entries的前一个index和term。如果follower在它的log中没有发现相同的index和term，就会拒绝这个最新的entries。</li>
-</ul>
-<p>当一致性检查成功的时候，leader就会知道follower的log和它自己的log完全一致。</p>
-<p>正常情况下，leader和follower中的log保持一致，但是当leader和follower cash的时候，会出现不一致的情况。</p>
-<p>如下图，follower的log可能会和一个新的leader的log不一致。</p>
-<p><img src="/images/raft_log_inconsistencies.png" alt=""></p>
-<p>在Raft中，leader通过强制使follower复制它自己log的来处理这种不一致的情况。这意味着在follower logs中的冲突的entries会被重写。</p>
-<p>为了让follower的日志和leader保持一致，Raft采取以下办法：</p>
-<ul>
-<li>leader找到最后一次两个log相同的点</li>
-<li>然后删除那个点之后的日志，</li>
-<li>并且发送给follower那个点之后leader的entries。</li>
-</ul>
-<p>上诉这些动作发生在一致性检查的过程中。leader保存了每个follower的nextIndex，这个index是leader发送给follower的下一个log entry的index。当一个leader开始当选的时候，它初始化所有的nextIndex为它自己的logs的最新一个index。如果一个follower的log和leader不一样，一致性检查会失败。当失败之后，leader会逐渐减少nextIndex，直到到达一个点，leader和lfollower的日志是一样的。这时候，会移出follower的冲突的entries，然后追加来自leader的log entries。</p>
-<p>有了这个机制，leader就不需要采取别的动作来回复日志一致。它仅仅只是开始正常的操作，日志会自动变得一致，当一致性检查失败的时候，leader永远不会重写或者删除它自己的log entries。</p>
-
-          
-        
+    <div class="post-spread">
       
     </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/16/plan-2017/">
-
-  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
-    <meta itemprop="name" content="DanDan">
-    <meta itemprop="description" content="">
-    <meta itemprop="image" content="/images/jiqimao02.png">
-  </span>
-
-  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-    <meta itemprop="name" content="DanDan的学习笔记">
-    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
-      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
-    </span>
-  </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                
-                <a class="post-title-link" href="/2016/12/16/plan-2017/" itemprop="url">
-                  一些想法
-                </a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-16T13:57:06+08:00">
-                2016-12-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-              <span class="post-meta-divider">|</span>
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/生活随笔/" itemprop="url" rel="index">
-                    <span itemprop="name">生活随笔</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <a href="/2016/12/16/plan-2017/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/16/plan-2017/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-
-          
-          
-
-          
-
-          
-
-        </div>
-      </header>
-    
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>主要是2016年都快过完了，这几天晚上睡觉想了想，时间虽然飞快，但是每个月在干什么事情，心里还是有点谱。</p>
-<h2 id="先说几件打脸的事情"><a href="#先说几件打脸的事情" class="headerlink" title="先说几件打脸的事情"></a>先说几件打脸的事情</h2><p>记得年初的时候，跟群里的null大神聊天，说了几件今年准备完成的大事：</p>
-<ul>
-<li><a href="https://docs.oracle.com/javase/specs/jvms/se7/html/" target="_blank" rel="external">Jvm规范</a> 过一遍</li>
-<li>Java内存模型与线程规范，即<a href="http://www.cs.umd.edu/~pugh/java/memoryModel/CommunityReview.pdf" target="_blank" rel="external">JSR-133</a> 过一遍</li>
-</ul>
-<p>然后到年中的时候，对Paxos以及一些分布式的算法入了迷，然后又夸下海口：</p>
-<ul>
-<li>将Paxos工程化，写出demo</li>
-<li>学习 <a href="https://pdos.csail.mit.edu/6.824/schedule.html" target="_blank" rel="external">Mit 6.824</a> 课程，能自己实现一个简单的k-v数据库</li>
-<li>将<a href="https://msdn.microsoft.com/en-us/library/jj554200.aspx" target="_blank" rel="external">CQRS Journey</a> 过一遍</li>
-</ul>
-<p>现在看看，真是年少无知，初生牛犊不怕虎。</p>
-<p>比如说paxos工程化，记得当时到处找资料，看论文，苦苦挣扎了有两三个星期之久，连hello world都没法下手，然后当时工作也比较忙，就慢慢放下这件事了。</p>
-<p>当然这里面也有些比较客观的原因，由于都是工作之余的时间，碎片化比较严重，往往一篇论文需要花一个星期，甚至更多的时间才能看完，导致效率低下，久而久之一件事就会拖很久，然后就慢慢被遗忘了。</p>
-<h2 id="现在正在做的事情"><a href="#现在正在做的事情" class="headerlink" title="现在正在做的事情"></a>现在正在做的事情</h2><p>鉴于之前脸被自己打得太厉害，现在就做太多承诺了，说说最近在做的事情。</p>
-<p>由于工作原因，无意中接触到Raft，虽然之前一直都有听过，但是都没深入细节。那天看完Raft的Abstract，我的眼泪都要掉下来，Raft直接告诉我们，学不会Paxos，以及不能工程化Paxos，真的不是由于我们的智商原因，真的是因为Paxos太<sup>tm</sup>难了，Lamport大师本人也只是对multi-Paxos做了简单的描述，省略了很多细节。这时候Raft站了出来，直接说我这个简单，只要按照我这个步骤来，就能实现一个一致性的协议。Raft简化了Paxos，把一致性算法分为几个独立的阶段，描述了一些细节，甚至给出了伪代码实现。so，现在正在做的事情，就是对着Raft来实现一遍，写出可以运行的demo。</p>
-<p>明年也有换工作的想法，除了实现Raft之外，也有在慢慢复习一些基础知识。争取明年能找个好工作吧。</p>
-<h2 id="面试感想"><a href="#面试感想" class="headerlink" title="面试感想"></a>面试感想</h2><p>因为进行了一两次面试，和群里的小伙伴聊了下，首先得确定自己的发展方向，是深入技术呢，还是去深耕业务？总感觉现在的位置比较尴尬，技术向吧，沉淀不够。初一扯，还能说点东西出来，但是往深了去，还是欠缺很多东西。往业务向呢，因为在现在的公司基本没做过业务开发，所以对这更是不懂。所以的先确定自己的发展方向。</p>
-<p>这几天睡觉也在想这个问题，觉得自己还是对分布式这块的技术比较有兴趣。虽然说可能工作中用不到，可能也看不到某些显著的成果，但求无愧于心吧。</p>
-<h2 id="来年的打算"><a href="#来年的打算" class="headerlink" title="来年的打算"></a>来年的打算</h2><p>首先得找个好工作，然后将raft完成。后面先只做一件事，那就是学习Mit 6.824的课程，实现一个k-v存储系统。至于完成之后再做什么，我觉得还是先不要想那么多吧，免得到时候又被打脸。</p>
-<p>就先说这么多吧。。。</p>
-
-          
-        
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-    <div>
-      
-    </div>
-
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </article>
-
-
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
@@ -1320,6 +629,14 @@ b = b[1:]      // len(b)=4, cap(b)=4
 
 
           
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/tour-of-go-01/"
+           data-title="A Tour of Go（一）：基本知识" data-url="https://zivyu.github.io/2016/12/30/tour-of-go-01/">
+      </div>
+    
+  </div>
+
 
         </div>
         
@@ -1339,8 +656,17 @@ b = b[1:]      // len(b)=4, cap(b)=4
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview sidebar-panel sidebar-panel-active">
+      <section class="site-overview sidebar-panel">
         <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
           <img class="site-author-image" itemprop="image"
                src="/images/jiqimao02.png"
@@ -1393,6 +719,22 @@ b = b[1:]      // len(b)=4, cap(b)=4
 
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Hello-world"><span class="nav-number">1.</span> <span class="nav-text">Hello,world!</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#包，变量和方法"><span class="nav-number">2.</span> <span class="nav-text">包，变量和方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#包"><span class="nav-number">2.1.</span> <span class="nav-text">包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#导入"><span class="nav-number">2.2.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Exported-names"><span class="nav-number">2.3.</span> <span class="nav-text">Exported names</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">2.4.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多个返回结果"><span class="nav-number">2.5.</span> <span class="nav-text">多个返回结果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令返回值"><span class="nav-number">2.6.</span> <span class="nav-text">命令返回值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量"><span class="nav-number">2.7.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量初始化"><span class="nav-number">2.8.</span> <span class="nav-text">变量初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#声明短变量"><span class="nav-number">2.9.</span> <span class="nav-text">声明短变量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本类型"><span class="nav-number">2.10.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#零值"><span class="nav-number">2.11.</span> <span class="nav-text">零值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型转换"><span class="nav-number">2.12.</span> <span class="nav-text">类型转换</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型推测"><span class="nav-number">2.13.</span> <span class="nav-text">类型推测</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常量"><span class="nav-number">2.14.</span> <span class="nav-text">常量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数值常量"><span class="nav-number">2.15.</span> <span class="nav-text">数值常量</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#流程控制语句"><span class="nav-number">3.</span> <span class="nav-text">流程控制语句</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#For"><span class="nav-number">3.1.</span> <span class="nav-text">For</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Go中的”while”"><span class="nav-number">3.2.</span> <span class="nav-text">Go中的”while”</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无限循环"><span class="nav-number">3.3.</span> <span class="nav-text">无限循环</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If语句"><span class="nav-number">3.4.</span> <span class="nav-text">If语句</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#If中的表达式"><span class="nav-number">3.5.</span> <span class="nav-text">If中的表达式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#if-and-else"><span class="nav-number">3.6.</span> <span class="nav-text">if and else</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Switch-以及-Switch的执行顺序"><span class="nav-number">3.7.</span> <span class="nav-text">Switch 以及 Switch的执行顺序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#没有条件的Switch"><span class="nav-number">3.8.</span> <span class="nav-text">没有条件的Switch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Defer"><span class="nav-number">3.9.</span> <span class="nav-text">Defer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#defer栈"><span class="nav-number">3.10.</span> <span class="nav-text">defer栈</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#更多的类型：structs，slices，和maps"><span class="nav-number">4.</span> <span class="nav-text">更多的类型：structs，slices，和maps</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#指针"><span class="nav-number">4.1.</span> <span class="nav-text">指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体"><span class="nav-number">4.2.</span> <span class="nav-text">结构体</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结构体字段"><span class="nav-number">4.3.</span> <span class="nav-text">结构体字段</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指向结构体的指针"><span class="nav-number">4.4.</span> <span class="nav-text">指向结构体的指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数组"><span class="nav-number">4.5.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slices"><span class="nav-number">4.6.</span> <span class="nav-text">Slices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slices-就像是数组的引用"><span class="nav-number">4.7.</span> <span class="nav-text">Slices 就像是数组的引用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#默认Slice"><span class="nav-number">4.8.</span> <span class="nav-text">默认Slice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slice的长度和容量"><span class="nav-number">4.9.</span> <span class="nav-text">Slice的长度和容量</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Nil-slices"><span class="nav-number">4.10.</span> <span class="nav-text">Nil slices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用make方法创建一个slice"><span class="nav-number">4.11.</span> <span class="nav-text">使用make方法创建一个slice</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Slices-of-slices"><span class="nav-number">4.12.</span> <span class="nav-text">Slices of slices</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#向一个slice添加元素"><span class="nav-number">4.13.</span> <span class="nav-text">向一个slice添加元素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Range"><span class="nav-number">4.14.</span> <span class="nav-text">Range</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Range-continued"><span class="nav-number">4.15.</span> <span class="nav-text">Range continued</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Maps"><span class="nav-number">4.16.</span> <span class="nav-text">Maps</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Map操作"><span class="nav-number">4.17.</span> <span class="nav-text">Map操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法值"><span class="nav-number">4.18.</span> <span class="nav-text">方法值</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#闭包"><span class="nav-number">4.19.</span> <span class="nav-text">闭包</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
     </div>
@@ -1498,6 +840,10 @@ b = b[1:]      // len(b)=4, cap(b)=4
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
 
   
 

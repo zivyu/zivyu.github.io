@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://zivyu.github.io/2016/12/30/tour-of-go-01/</loc>
+    
+    <lastmod>2016-12-30T10:11:43.660Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://zivyu.github.io/2016/12/26/raft-principle-implement-02/</loc>
     
     <lastmod>2016-12-29T07:39:16.087Z</lastmod>
