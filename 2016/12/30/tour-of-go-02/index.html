@@ -1,0 +1,803 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.0" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Go,编程语言," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.1.0" />
+
+
+
+
+
+
+<meta name="description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。
+12345678910111213141516171819package mainimport (	&quot;fmt&quot;	&quot;math&quot;)type Vert">
+<meta property="og:type" content="article">
+<meta property="og:title" content="A Tour of Go（二）：基本知识">
+<meta property="og:url" content="https://zivyu.github.io/2016/12/30/tour-of-go-02/index.html">
+<meta property="og:site_name" content="DanDan的学习笔记">
+<meta property="og:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。
+12345678910111213141516171819package mainimport (	&quot;fmt&quot;	&quot;math&quot;)type Vert">
+<meta property="og:updated_time" content="2017-01-03T11:09:06.731Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="A Tour of Go（二）：基本知识">
+<meta name="twitter:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。
+12345678910111213141516171819package mainimport (	&quot;fmt&quot;	&quot;math&quot;)type Vert">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="https://zivyu.github.io/2016/12/30/tour-of-go-02/"/>
+
+
+
+
+
+  <title> A Tour of Go（二）：基本知识 | DanDan的学习笔记 </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?ec91f39600049a481c2c32d404e8d3cc";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">DanDan的学习笔记</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle"></p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+  <link itemprop="mainEntityOfPage" href="https://zivyu.github.io/2016/12/30/tour-of-go-02/">
+
+  <span style="display:none" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <meta itemprop="name" content="DanDan">
+    <meta itemprop="description" content="">
+    <meta itemprop="image" content="/images/jiqimao02.png">
+  </span>
+
+  <span style="display:none" itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+    <meta itemprop="name" content="DanDan的学习笔记">
+    <span style="display:none" itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+      <img style="display:none;" itemprop="url image" alt="DanDan的学习笔记" src="">
+    </span>
+  </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                A Tour of Go（二）：基本知识
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2016-12-30T10:29:39+08:00">
+                2016-12-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+              <span class="post-meta-divider">|</span>
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Go语言/" itemprop="url" rel="index">
+                    <span itemprop="name">Go语言</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+              <span class="post-comments-count">
+                <span class="post-meta-divider">|</span>
+                <a href="/2016/12/30/tour-of-go-02/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count ds-thread-count" data-thread-key="2016/12/30/tour-of-go-02/" itemprop="commentCount"></span>
+                </a>
+              </span>
+            
+          
+
+          
+
+          
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本节我们主要学习怎么定义方法、怎么声明接口，等。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>Go语言没有类，但是我们可以在类型上定义方法。</p>
+<p>方法有一个特殊的<em>接受者</em>参数的函数。</p>
+<p>接受者出现在<code>func</code>关键字和方法名之间的参数列表中。</p>
+<p>比如说下面的例子，方法<code>Abs</code>有一个类型为<code>Vertex</code>的接受者。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	fmt.Println(v.Abs())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方法及函数"><a href="#方法及函数" class="headerlink" title="方法及函数"></a>方法及函数</h3><p>方法仅仅是一个有接收者参数的函数。</p>
+<p>可以把方法重写为一个函数，如下乳，<code>Abs</code>可以被写为一个常规的方法</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Abs</span><span class="params">(v Vertex)</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	fmt.Println(Abs(v))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方法（续）"><a href="#方法（续）" class="headerlink" title="方法（续）"></a>方法（续）</h3><p>也可以为non-struct类型声明方法，</p>
+<p>看下面的例子，数值类型<code>MyFloat</code>有一个<code>Abs</code>方法。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> MyFloat <span class="keyword">float64</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f MyFloat)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">if</span> f &lt; <span class="number">0</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">float64</span>(-f)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">float64</span>(f)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	f := MyFloat(-math.Sqrt2)</div><div class="line">	fmt.Println(f.Abs())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="指针接收者"><a href="#指针接收者" class="headerlink" title="指针接收者"></a>指针接收者</h3><p>可以声明方法的接收者是指针。</p>
+<p>看下面的例子，<code>Scale</code>方法定义在<code>*Vertex</code>之上。</p>
+<p>这样可以修改接收者的值，如果不传指针，则是原始对象的一个拷贝。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Scale</span><span class="params">(f <span class="keyword">float64</span>)</span></span> &#123;</div><div class="line">	v.X = v.X * f</div><div class="line">	v.Y = v.Y * f</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	v.Scale(<span class="number">10</span>)</div><div class="line">	fmt.Println(v.Abs())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="指针和函数"><a href="#指针和函数" class="headerlink" title="指针和函数"></a>指针和函数</h3><p>也可以把方法重写成一个函数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Abs</span><span class="params">(v Vertex)</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">Scale</span><span class="params">(v Vertex, f <span class="keyword">float64</span>)</span></span> &#123;</div><div class="line">	v.X = v.X * f</div><div class="line">	v.Y = v.Y * f</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	Scale(v, <span class="number">10</span>)</div><div class="line">	fmt.Println(Abs(v))</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="方法和间接指针"><a href="#方法和间接指针" class="headerlink" title="方法和间接指针"></a>方法和间接指针</h3><p>在之前的例子中，有一个指针参数的方法比如传入一个指针：</p>
+<pre><code>var v Vertex
+ScaleFunc(v)  // Compile error!
+ScaleFunc(&amp;v) // OK
+</code></pre><p>而调用指针接收者的方法的时候，既不需要传入值也不需要传入指针：</p>
+<pre><code>var v Vertex
+v.Scale(5)  // OK
+p := &amp;v
+p.Scale(10) // OK
+</code></pre><p>对于语句<code>v.Scale(5)</code>，会自动调用有指针接收者的方法。比如说，<code>v.Scale(5)</code>会变为<code>(&amp;v).Scale(5)</code>，因为<code>Scale</code>方法有一个指针接收者：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Scale</span><span class="params">(f <span class="keyword">float64</span>)</span></span> &#123;</div><div class="line">	v.X = v.X * f</div><div class="line">	v.Y = v.Y * f</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">ScaleFunc</span><span class="params">(v *Vertex, f <span class="keyword">float64</span>)</span></span> &#123;</div><div class="line">	v.X = v.X * f</div><div class="line">	v.Y = v.Y * f</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	v.Scale(<span class="number">2</span>)</div><div class="line">	ScaleFunc(&amp;v, <span class="number">10</span>)</div><div class="line"></div><div class="line">	p := &amp;Vertex&#123;<span class="number">4</span>, <span class="number">3</span>&#125;</div><div class="line">	p.Scale(<span class="number">3</span>)</div><div class="line">	ScaleFunc(p, <span class="number">8</span>)</div><div class="line"></div><div class="line">	fmt.Println(v, p)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="选择值接收者还是指针接收者"><a href="#选择值接收者还是指针接收者" class="headerlink" title="选择值接收者还是指针接收者"></a>选择值接收者还是指针接收者</h3><p>选择指针接收者有两个原因：</p>
+<p>第一个原因是可以修改接收者指针的值。</p>
+<p>第二个原因避免每次调用的时候复制值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Scale</span><span class="params">(f <span class="keyword">float64</span>)</span></span> &#123;</div><div class="line">	v.X = v.X * f</div><div class="line">	v.Y = v.Y * f</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := &amp;Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	fmt.Printf(<span class="string">"Before scaling: %+v, Abs: %v\n"</span>, v, v.Abs())</div><div class="line">	v.Scale(<span class="number">5</span>)</div><div class="line">	fmt.Printf(<span class="string">"After scaling: %+v, Abs: %v\n"</span>, v, v.Abs())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h3><p><em>接口类型</em>是一组方法签名的集合。</p>
+<p>接口类型的值可以存放实现这些方法的任何值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Abser <span class="keyword">interface</span> &#123;</div><div class="line">	Abs() <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> a Abser</div><div class="line">	f := MyFloat(-math.Sqrt2)</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line"></div><div class="line">	a = f  <span class="comment">// a MyFloat implements Abser</span></div><div class="line">	a = &amp;v <span class="comment">// a *Vertex implements Abser</span></div><div class="line"></div><div class="line">	<span class="comment">// In the following line, v is a Vertex (not *Vertex)</span></div><div class="line">	<span class="comment">// and does NOT implement Abser.</span></div><div class="line">	a = v</div><div class="line"></div><div class="line">	fmt.Println(a.Abs())</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> MyFloat <span class="keyword">float64</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(f MyFloat)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">if</span> f &lt; <span class="number">0</span> &#123;</div><div class="line">		<span class="keyword">return</span> <span class="keyword">float64</span>(-f)</div><div class="line">	&#125;</div><div class="line">	<span class="keyword">return</span> <span class="keyword">float64</span>(f)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v *Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="接口的隐式实现"><a href="#接口的隐式实现" class="headerlink" title="接口的隐式实现"></a>接口的隐式实现</h3><p>一个类型通过实现接口的方法来实现一个接口。不需要显示的声明，也没有”implements”关键字。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="keyword">type</span> I <span class="keyword">interface</span> &#123;</div><div class="line">	M()</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="keyword">type</span> T <span class="keyword">struct</span> &#123;</div><div class="line">	S <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="comment">// This method means type T implements the interface I,</span></div><div class="line"><span class="comment">// but we don't need to explicitly declare that it does so.</span></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(t T)</span> <span class="title">M</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(t.S)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> i I = T&#123;<span class="string">"hello"</span>&#125;</div><div class="line">	i.M()</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="空接口"><a href="#空接口" class="headerlink" title="空接口"></a>空接口</h3><p>空接口没有指定任何方法：</p>
+<pre><code>interface{}
+</code></pre><p>一个空接口可以存储任何类型的值。</p>
+<p>空接口用来编写处理未知类型的值。比如说<code>fmt.Print</code> 处理许多<code>interface{}</code>的参数：</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125;</div><div class="line">	describe(i)</div><div class="line"></div><div class="line">	i = <span class="number">42</span></div><div class="line">	describe(i)</div><div class="line"></div><div class="line">	i = <span class="string">"hello"</span></div><div class="line">	describe(i)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">describe</span><span class="params">(i <span class="keyword">interface</span>&#123;&#125;)</span></span> &#123;</div><div class="line">	fmt.Printf(<span class="string">"(%v, %T)\n"</span>, i, i)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类型断言"><a href="#类型断言" class="headerlink" title="类型断言"></a>类型断言</h3><p><em>类型断言</em></p>
+<pre><code>t := i.(T)
+</code></pre><p>上述语言断言接口值<code>i</code>保存了具体的类型<code>T</code>，并把具体<code>T</code>的值分配给变量<code>t</code>。</p>
+<p>但是如果<code>i</code>没有保存一个<code>T</code>，上述的语句会出现错误。</p>
+<p>为了<code>测试</code>一个接口值是否保存了一个具体的类型，类型断言可以返回两个值：具体的类型值和断言是否成功。</p>
+<pre><code>t, ok := i.(T)
+</code></pre><p>如果<code>i</code>保存着<code>T</code>，然后<code>t</code>将会是具体的值，<code>ok</code>将会是true。</p>
+<p>反之，<code>ok</code>将是false，<code>t</code>将会是类型<code>T</code>的零值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">var</span> i <span class="keyword">interface</span>&#123;&#125; = <span class="string">"hello"</span></div><div class="line"></div><div class="line">	s := i.(<span class="keyword">string</span>)</div><div class="line">	fmt.Println(s)</div><div class="line"></div><div class="line">	s, ok := i.(<span class="keyword">string</span>)</div><div class="line">	fmt.Println(s, ok)</div><div class="line"></div><div class="line">	f, ok := i.(<span class="keyword">float64</span>)</div><div class="line">	fmt.Println(f, ok)</div><div class="line"></div><div class="line">	f = i.(<span class="keyword">float64</span>) <span class="comment">// panic</span></div><div class="line">	fmt.Println(f)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="类型switches"><a href="#类型switches" class="headerlink" title="类型switches"></a>类型switches</h3><p>类型转换就像常规的转换语句一样，但是case是具体的类型而不是值。</p>
+<pre><code>switch v := i.(type) {
+case T:
+    // here v has type T
+case S:
+    // here v has type S
+default:
+    // no match; here v has the same type as i
+}
+</code></pre><h3 id="Stringers"><a href="#Stringers" class="headerlink" title="Stringers"></a>Stringers</h3><p>最普通的接口之一是<code>Stringer</code></p>
+<pre><code>type Stringer interface {
+    String() string
+}
+</code></pre><p>一个<code>Stringer</code>是一个可以把它自己描述为一个字符串的类型。<code>fmt</code>包寻找这个接口来打印值。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="keyword">type</span> Person <span class="keyword">struct</span> &#123;</div><div class="line">	Name <span class="keyword">string</span></div><div class="line">	Age  <span class="keyword">int</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(p Person)</span> <span class="title">String</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"%v (%v years)"</span>, p.Name, p.Age)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	a := Person&#123;<span class="string">"Arthur Dent"</span>, <span class="number">42</span>&#125;</div><div class="line">	z := Person&#123;<span class="string">"Zaphod Beeblebrox"</span>, <span class="number">9001</span>&#125;</div><div class="line">	fmt.Println(a, z)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="错误"><a href="#错误" class="headerlink" title="错误"></a>错误</h3><p>Go程序使用<code>error</code>值来表达错误状态。</p>
+<p><code>error</code>类型是内建接口。</p>
+<pre><code>type error interface {
+    Error() string
+}
+</code></pre><p>函数经常返回一个<code>error</code>值，调用程序通过调用error是否等于<code>nil</code>来处理错误。</p>
+<pre><code>i, err := strconv.Atoi(&quot;42&quot;)
+if err != nil {
+    fmt.Printf(&quot;couldn&apos;t convert number: %v\n&quot;, err)
+    return
+}
+fmt.Println(&quot;Converted integer:&quot;, i)
+</code></pre><p>一个nil的<code>error</code>表示成功，一个non-nil的<code>error</code>表示失败。</p>
+<figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"time"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> MyError <span class="keyword">struct</span> &#123;</div><div class="line">	When time.Time</div><div class="line">	What <span class="keyword">string</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(e *MyError)</span> <span class="title">Error</span><span class="params">()</span> <span class="title">string</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> fmt.Sprintf(<span class="string">"at %v, %s"</span>,</div><div class="line">		e.When, e.What)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">run</span><span class="params">()</span> <span class="title">error</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> &amp;MyError&#123;</div><div class="line">		time.Now(),</div><div class="line">		<span class="string">"it didn't work"</span>,</div><div class="line">	&#125;</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	<span class="keyword">if</span> err := run(); err != <span class="literal">nil</span> &#123;</div><div class="line">		fmt.Println(err)</div><div class="line">	&#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Go/" rel="tag"># Go</a>
+          
+            <a href="/tags/编程语言/" rel="tag"># 编程语言</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/12/28/raft-principle-implement-03/" rel="next" title="raft-principle-implement-03">
+                <i class="fa fa-chevron-left"></i> raft-principle-implement-03
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/12/30/tour-of-go-01/" rel="prev" title="A Tour of Go（一）：基本知识">
+                A Tour of Go（一）：基本知识 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+      <div class="ds-thread" data-thread-key="2016/12/30/tour-of-go-02/"
+           data-title="A Tour of Go（二）：基本知识" data-url="https://zivyu.github.io/2016/12/30/tour-of-go-02/">
+      </div>
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/jiqimao02.png"
+               alt="DanDan" />
+          <p class="site-author-name" itemprop="name">DanDan</p>
+          <p class="site-description motion-element" itemprop="description">爱生活，爱学习，爱旅行。</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">6</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+            <div class="site-state-item site-state-categories">
+              <a href="/categories">
+                <span class="site-state-item-count">3</span>
+                <span class="site-state-item-name">分类</span>
+              </a>
+            </div>
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+        
+
+
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法及函数"><span class="nav-number">2.</span> <span class="nav-text">方法及函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法（续）"><span class="nav-number">3.</span> <span class="nav-text">方法（续）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针接收者"><span class="nav-number">4.</span> <span class="nav-text">指针接收者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针和函数"><span class="nav-number">5.</span> <span class="nav-text">指针和函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#方法和间接指针"><span class="nav-number">6.</span> <span class="nav-text">方法和间接指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择值接收者还是指针接收者"><span class="nav-number">7.</span> <span class="nav-text">选择值接收者还是指针接收者</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口"><span class="nav-number">8.</span> <span class="nav-text">接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#接口的隐式实现"><span class="nav-number">9.</span> <span class="nav-text">接口的隐式实现</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#空接口"><span class="nav-number">10.</span> <span class="nav-text">空接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型断言"><span class="nav-number">11.</span> <span class="nav-text">类型断言</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类型switches"><span class="nav-number">12.</span> <span class="nav-text">类型switches</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stringers"><span class="nav-number">13.</span> <span class="nav-text">Stringers</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#错误"><span class="nav-number">14.</span> <span class="nav-text">错误</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2017</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">DanDan</span>
+</div>
+
+
+<div class="powered-by">
+  由 <a class="theme-link" href="https://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Pisces
+  </a>
+</div>
+
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.0"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.0"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.0"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.0"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.0"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.0"></script>
+
+
+
+  
+
+  
+    
+  
+
+  <script type="text/javascript">
+    var duoshuoQuery = {short_name:"zivyu"};
+    (function() {
+      var ds = document.createElement('script');
+      ds.type = 'text/javascript';ds.async = true;
+      ds.id = 'duoshuo-script';
+      ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+      ds.charset = 'UTF-8';
+      (document.getElementsByTagName('head')[0]
+      || document.getElementsByTagName('body')[0]).appendChild(ds);
+    })();
+  </script>
+
+  
+    
+    
+    <script src="/lib/ua-parser-js/dist/ua-parser.min.js?v=0.7.9"></script>
+    <script src="/js/src/hook-duoshuo.js"></script>
+  
+
+
+
+
+
+
+
+
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+
+</body>
+</html>
