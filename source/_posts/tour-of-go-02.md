@@ -1,6 +1,6 @@
 ---
-title: A Tour of Go（二）：基本知识
-date: 2016-12-30 10:29:39
+title: A Tour of Go（二）：方法和接口
+date: 2017-1-3 19:27:26
 categories:
 - Go语言
 tags:
