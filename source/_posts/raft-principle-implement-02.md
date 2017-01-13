@@ -1,6 +1,7 @@
 ---
 title: Raft原理与实现（二）：安全性与成员变更
 date: 2016-12-26 12:02:33
+description: 之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...
 categories:
 - Raft原理与实现
 tags:
