@@ -1,8 +1,8 @@
 ---
-title: MapReduce原理与实现（一）：基本原理以及单机版实现
+title: MapReduce原理与实现（一）：基本原理
 date: 2017-01-05 10:37:08
 categories:
-- Mit 6.824
+- 分布式学习
 tags:
 - MapReduce
 - 分布式
@@ -51,7 +51,10 @@ map方法发出每个单词出现的次数。reduce方法聚合一个单词所�
 
 	map (k1,v1) ! list(k2,v2)
 	reduce (k2,list(v2)) ! list(v2)
+
 ## Implementation
+
+### Execution Overview
 
 本节描述了在Google广泛使用的一个实现。
 
@@ -60,25 +63,50 @@ map方法发出每个单词出现的次数。reduce方法聚合一个单词所�
 如上图，描述了一个MapReduce操作的整体流程。当一个用户程序调用`MapReduce`方法，将会发生下列动作：
 
 1. MapReduce库首先将会把输入文件切分成M份，每份的大小通常为16M到64M。然后在集群中启动程序。
-
 2. 其中有一个程序是master，其余的为workers。workers由master分配任务。总共会分配M个map和R个reduce任务。master会挑选空闲的worker，并给他们分配map或者reduce任务。
-
 3. 分配到map任务的worker会读取对应的输入文件的内容。解析出输入数据的k/v对，然后传递给*Map*方法。map方法生成的K/V中间结果会在内存中缓存。
-
 4. 缓存中的数据将会定期被写到本地磁盘上，并划分为R个部分。这些数据保存的位置会被通知给master。
-
 5. 当master通知一个reduce worker这些数据保存的位置时，该worker使用RPC调用来读取本地磁盘保存的数据。当reduce worker读取完所有的中间结果时，它会根据key来排序。
-
 6. reduce worker迭代所有中间结果，对于每个独一无二的key，它将与这个key对应的集合数据传递给用户定义的*Reduce*方法。reduce输出的结果会被追加到结果文件中。
-
 7. 当所有的map和reduce任务完成，mater唤醒用户程序。然后`MapReduce`调用返回结果。
 
 在成功完成之后，mapreduce的执行结果可能会在R个输出文件中。用户通常不需要合并这R个文件，因为，可以把它们作为新的MapReduce的输入数据，或者在别的分布式系统中使用它们。
 
+### Master Data Structures
 
-## MapReduce单机版实现
+### Fault Tolerance
 
-上面的内容为阅读原论文的笔记。下面将根据[Mit 6.824 lab1](https://pdos.csail.mit.edu/6.824/labs/lab-1.html)的要求，实现一个MapReduce库。
+### Locality
+
+### Task Granularity
+
+### Backup Tasks
+
+## Refinements
+
+### Partitioning Function
+
+### Ordering Guarantees
+
+### Combiner Function
+
+### Input and Output Types
+
+### Side-effects
+
+### Skipping Bad Records
+
+### Local Execution
+
+### Status Information
+
+### Counters
+
+## Performance
+
+略
+
+
 
 
 
