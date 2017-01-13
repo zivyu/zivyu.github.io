@@ -371,10 +371,19 @@
 
       
         
-          在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...
+          <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：</p>
+<p>如下所示：</p>
+<pre><code>input is divided into &quot;splits&quot;
+Input Map -&gt; a,1 b,1 c,1
+Input Map -&gt;     b,1
+Input Map -&gt; a,1     c,1
+            |   |   |
+                |   -&gt; Reduce -&gt; c,2
+                -----&gt; Reduce -&gt; b,2
+</code></pre>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/12/mapreduce-principle-implement-02/">
+            <a class="btn" href="/2017/01/12/mapreduce-principle-implement-02/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -517,10 +526,11 @@
 
       
         
-          MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...
+          <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MapReduce是用来处理大数据的一个编程模型。</p>
+<p>用户一般规定了<em>map</em>方法来处理一个k/v对，而<em>reduce</em>方法来合并相关的中间值。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/05/mapreduce-principle-implement-01/">
+            <a class="btn" href="/2017/01/05/mapreduce-principle-implement-01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -663,10 +673,14 @@
 
       
         
-          本节我们主要学习怎么定义方法、怎么声明接口，等。Go语言没有类，但是我们可以在类型上定义方法。方法有一个特殊的接受者参数的函数。...
+          <p>本节我们主要学习怎么定义方法、怎么声明接口，等。</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>Go语言没有类，但是我们可以在类型上定义方法。</p>
+<p>方法有一个特殊的<em>接受者</em>参数的函数。</p>
+<p>接受者出现在<code>func</code>关键字和方法名之间的参数列表中。</p>
+<p>比如说下面的例子，方法<code>Abs</code>有一个类型为<code>Vertex</code>的接受者。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2017/01/03/tour-of-go-02/">
+            <a class="btn" href="/2017/01/03/tour-of-go-02/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -809,10 +823,12 @@
 
       
         
-          在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...
+          <p>在正式开始Mit 6.824之前，我先按照<a href="https://golang.org/doc/#go_tour">A Tour of Go</a> ，学习Go语言的语法和相关知识。</p>
+<p>A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。</p>
+<p>本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/30/tour-of-go-01/">
+            <a class="btn" href="/2016/12/30/tour-of-go-01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -955,10 +971,10 @@
 
       
         
-          这一节是要是日志压缩和客户端交互的部分，先略过。如果能实现一、二篇所描述的部分，再来实现本节。
+          <p>这一节是要是日志压缩和客户端交互的部分，先略过。如果能实现一、二篇所描述的部分，再来实现本节。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/28/raft-principle-implement-03/">
+            <a class="btn" href="/2016/12/28/raft-principle-implement-03/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1101,10 +1117,10 @@
 
       
         
-          之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...
+          <h2 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h2><p>之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/26/raft-principle-implement-02/">
+            <a class="btn" href="/2016/12/26/raft-principle-implement-02/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1247,10 +1263,10 @@
 
       
         
-          Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...
+          <h2 id="Raft是什么"><a href="#Raft是什么" class="headerlink" title="Raft是什么"></a>Raft是什么</h2><p>Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一致性的约束来减少需要考虑的状态数目。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/21/raft-principle-implement-01/">
+            <a class="btn" href="/2016/12/21/raft-principle-implement-01/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>
@@ -1393,10 +1409,10 @@
 
       
         
-          主要是2016年都快过完了，这几天晚上睡觉想了想，时间虽然飞快，但是每个月在干什么事情，心里还是有点谱。先说几件打脸的事情...
+          <p>主要是2016年都快过完了，这几天晚上睡觉想了想，时间虽然飞快，但是每个月在干什么事情，心里还是有点谱。</p>
           <!--noindex-->
           <div class="post-more-link text-center">
-            <a class="btn" href="/2016/12/16/plan-2017/">
+            <a class="btn" href="/2016/12/16/plan-2017/#more" rel="contents">
               阅读全文 &raquo;
             </a>
           </div>

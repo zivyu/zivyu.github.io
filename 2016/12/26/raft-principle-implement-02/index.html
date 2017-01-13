@@ -84,20 +84,20 @@
 
 
 
-<meta name="description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
+<meta name="description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft原理与实现（二）：安全性与成员变更">
 <meta property="og:url" content="https://zivyu.github.io/2016/12/26/raft-principle-implement-02/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
+<meta property="og:description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_safy_r.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_safy_02.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_member_change_01.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_member_change02.png">
-<meta property="og:updated_time" content="2017-01-13T09:42:40.200Z">
+<meta property="og:updated_time" content="2017-01-13T09:51:04.622Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft原理与实现（二）：安全性与成员变更">
-<meta name="twitter:description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
+<meta name="twitter:description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。">
 <meta name="twitter:image" content="https://zivyu.github.io/images/raft_safy_r.png">
 
 
@@ -359,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...
-              </div>
-          
 
         </div>
       </header>
@@ -376,6 +372,7 @@
 
       
         <h2 id="Safety"><a href="#Safety" class="headerlink" title="Safety"></a>Safety</h2><p>之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。</p>
+<a id="more"></a>
 <h3 id="Election-restriction"><a href="#Election-restriction" class="headerlink" title="Election restriction"></a>Election restriction</h3><p>Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。</p>
 <p>Raft在投票的过程中就保证了一个candidate赢得选举的条件是这个candidate必须包含所有被committed entries。为了赢得选举，candidate必须与集群中的大多数联系，这意味着每个被committed entry至少在这些大多数中的一台中存在。如果candidate的log和集群中的大多数比一样新或比他们更新，那么就可以认为这个candidate hold所有被committed entries。这个限制是通过The RequestVote RPC来实现的：</p>
 <ul>

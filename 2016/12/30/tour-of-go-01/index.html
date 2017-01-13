@@ -84,16 +84,22 @@
 
 
 
-<meta name="description" content="在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...">
+<meta name="description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Tour of Go（一）：基本知识">
 <meta property="og:url" content="https://zivyu.github.io/2016/12/30/tour-of-go-01/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...">
-<meta property="og:updated_time" content="2017-01-13T09:43:13.851Z">
+<meta property="og:description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。">
+<meta property="og:updated_time" content="2017-01-13T09:51:28.696Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Tour of Go（一）：基本知识">
-<meta name="twitter:description" content="在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...">
+<meta name="twitter:description" content="在正式开始Mit 6.824之前，我先按照A Tour of Go ，学习Go语言的语法和相关知识。
+A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
+本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。">
 
 
 
@@ -354,10 +360,6 @@
           
 
           
-              <div class="post-description">
-                  在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...
-              </div>
-          
 
         </div>
       </header>
@@ -373,6 +375,7 @@
         <p>在正式开始Mit 6.824之前，我先按照<a href="https://golang.org/doc/#go_tour" target="_blank" rel="external">A Tour of Go</a> ，学习Go语言的语法和相关知识。</p>
 <p>A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。</p>
 <p>本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。</p>
+<a id="more"></a>
 <h2 id="Hello-world"><a href="#Hello-world" class="headerlink" title="Hello,world!"></a>Hello,world!</h2><figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> <span class="string">"fmt"</span></div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"Hello, 世界"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h2 id="包，变量和方法"><a href="#包，变量和方法" class="headerlink" title="包，变量和方法"></a>包，变量和方法</h2><h3 id="包"><a href="#包" class="headerlink" title="包"></a>包</h3><p>每个Go程序都由包组成。程序由<code>main</code>包处开始运行。比如说下面的程序使用导入的包”fmt”和”math/rand”。</p>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math/rand"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	fmt.Println(<span class="string">"My favorite number is"</span>, rand.Intn(<span class="number">10</span>))</div><div class="line">&#125;</div></pre></td></tr></table></figure>

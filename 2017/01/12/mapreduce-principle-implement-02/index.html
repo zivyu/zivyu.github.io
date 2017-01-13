@@ -84,16 +84,28 @@
 
 
 
-<meta name="description" content="在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...">
+<meta name="description" content="概览在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：
+如下所示：
+input is divided into &amp;quot;splits&amp;quot;
+Input Map -&amp;gt; a,1 b,1 c,1
+Input Map -&amp;gt;     b,1">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MapReduce原理与实现（二）：MapReduce的实现">
 <meta property="og:url" content="https://zivyu.github.io/2017/01/12/mapreduce-principle-implement-02/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...">
-<meta property="og:updated_time" content="2017-01-13T09:42:06.485Z">
+<meta property="og:description" content="概览在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：
+如下所示：
+input is divided into &amp;quot;splits&amp;quot;
+Input Map -&amp;gt; a,1 b,1 c,1
+Input Map -&amp;gt;     b,1">
+<meta property="og:updated_time" content="2017-01-13T09:50:13.463Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MapReduce原理与实现（二）：MapReduce的实现">
-<meta name="twitter:description" content="在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...">
+<meta name="twitter:description" content="概览在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：
+如下所示：
+input is divided into &amp;quot;splits&amp;quot;
+Input Map -&amp;gt; a,1 b,1 c,1
+Input Map -&amp;gt;     b,1">
 
 
 
@@ -354,10 +366,6 @@
           
 
           
-              <div class="post-description">
-                  在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...
-              </div>
-          
 
         </div>
       </header>
@@ -370,7 +378,7 @@
       
 
       
-        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：…</p>
+        <h2 id="概览"><a href="#概览" class="headerlink" title="概览"></a>概览</h2><p>在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：</p>
 <p>如下所示：</p>
 <pre><code>input is divided into &quot;splits&quot;
 Input Map -&gt; a,1 b,1 c,1
@@ -379,7 +387,8 @@ Input Map -&gt; a,1     c,1
             |   |   |
                 |   -&gt; Reduce -&gt; c,2
                 -----&gt; Reduce -&gt; b,2
-</code></pre><p>主要逻辑如下：</p>
+</code></pre><a id="more"></a>
+<p>主要逻辑如下：</p>
 <ol>
 <li>MR会对每个split来调用Map()，并产生中间结果集k2,v2</li>
 <li>对于每个k2，MR会聚合所有与之相对应的中间值v2。然后调用Reduce()</li>

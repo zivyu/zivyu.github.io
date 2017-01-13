@@ -84,17 +84,20 @@
 
 
 
-<meta name="description" content="MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...">
+<meta name="description" content="IntroductionMapReduce是用来处理大数据的一个编程模型。
+用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="MapReduce原理与实现（一）：基本原理">
 <meta property="og:url" content="https://zivyu.github.io/2017/01/05/mapreduce-principle-implement-01/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...">
+<meta property="og:description" content="IntroductionMapReduce是用来处理大数据的一个编程模型。
+用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。">
 <meta property="og:image" content="https://zivyu.github.io/images/mapreduce_implement_01.png">
-<meta property="og:updated_time" content="2017-01-13T09:41:51.353Z">
+<meta property="og:updated_time" content="2017-01-13T09:48:53.655Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MapReduce原理与实现（一）：基本原理">
-<meta name="twitter:description" content="MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...">
+<meta name="twitter:description" content="IntroductionMapReduce是用来处理大数据的一个编程模型。
+用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。">
 <meta name="twitter:image" content="https://zivyu.github.io/images/mapreduce_implement_01.png">
 
 
@@ -356,10 +359,6 @@
           
 
           
-              <div class="post-description">
-                  MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...
-              </div>
-          
 
         </div>
       </header>
@@ -374,6 +373,7 @@
       
         <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>MapReduce是用来处理大数据的一个编程模型。</p>
 <p>用户一般规定了<em>map</em>方法来处理一个k/v对，而<em>reduce</em>方法来合并相关的中间值。</p>
+<a id="more"></a>
 <h2 id="Programming-Model"><a href="#Programming-Model" class="headerlink" title="Programming Model"></a>Programming Model</h2><p>计算任务以k/v对的集合作为<em>输入</em>，并产生另外的k/v集合作为<em>输出</em>。用户通过<em>Map</em>和<em>Reduce</em>方法来控制计算。</p>
 <p><em>Map</em>，接受一个k/v对为输入，并产生<em>中间的</em>k/v集合。MapReduce将会以相同的中间的key <em>I</em>来聚合所有相关的值，并把这个集合传递给<em>Reduce</em>方法。</p>
 <p><em>Reduce</em>，接受key <em>I</em>和相关的值，它将这些值进行合并，从而形成一个更小的集合。通常每次Reduce调用会有0到1个输出。</p>

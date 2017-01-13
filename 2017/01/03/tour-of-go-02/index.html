@@ -84,16 +84,28 @@
 
 
 
-<meta name="description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。Go语言没有类，但是我们可以在类型上定义方法。方法有一个特殊的接受者参数的函数。...">
+<meta name="description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="A Tour of Go（二）：方法和接口">
 <meta property="og:url" content="https://zivyu.github.io/2017/01/03/tour-of-go-02/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。Go语言没有类，但是我们可以在类型上定义方法。方法有一个特殊的接受者参数的函数。...">
-<meta property="og:updated_time" content="2017-01-13T09:44:44.640Z">
+<meta property="og:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。">
+<meta property="og:updated_time" content="2017-01-13T09:51:45.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="A Tour of Go（二）：方法和接口">
-<meta name="twitter:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。Go语言没有类，但是我们可以在类型上定义方法。方法有一个特殊的接受者参数的函数。...">
+<meta name="twitter:description" content="本节我们主要学习怎么定义方法、怎么声明接口，等。
+方法Go语言没有类，但是我们可以在类型上定义方法。
+方法有一个特殊的接受者参数的函数。
+接受者出现在func关键字和方法名之间的参数列表中。
+比如说下面的例子，方法Abs有一个类型为Vertex的接受者。">
 
 
 
@@ -354,10 +366,6 @@
           
 
           
-              <div class="post-description">
-                  本节我们主要学习怎么定义方法、怎么声明接口，等。Go语言没有类，但是我们可以在类型上定义方法。方法有一个特殊的接受者参数的函数。...
-              </div>
-          
 
         </div>
       </header>
@@ -375,6 +383,7 @@
 <p>方法有一个特殊的<em>接受者</em>参数的函数。</p>
 <p>接受者出现在<code>func</code>关键字和方法名之间的参数列表中。</p>
 <p>比如说下面的例子，方法<code>Abs</code>有一个类型为<code>Vertex</code>的接受者。</p>
+<a id="more"></a>
 <figure class="highlight go"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">package</span> main</div><div class="line"></div><div class="line"><span class="keyword">import</span> (</div><div class="line">	<span class="string">"fmt"</span></div><div class="line">	<span class="string">"math"</span></div><div class="line">)</div><div class="line"></div><div class="line"><span class="keyword">type</span> Vertex <span class="keyword">struct</span> &#123;</div><div class="line">	X, Y <span class="keyword">float64</span></div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="params">(v Vertex)</span> <span class="title">Abs</span><span class="params">()</span> <span class="title">float64</span></span> &#123;</div><div class="line">	<span class="keyword">return</span> math.Sqrt(v.X*v.X + v.Y*v.Y)</div><div class="line">&#125;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">func</span> <span class="title">main</span><span class="params">()</span></span> &#123;</div><div class="line">	v := Vertex&#123;<span class="number">3</span>, <span class="number">4</span>&#125;</div><div class="line">	fmt.Println(v.Abs())</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <h3 id="方法及函数"><a href="#方法及函数" class="headerlink" title="方法及函数"></a>方法及函数</h3><p>方法仅仅是一个有接收者参数的函数。</p>
 <p>可以把方法重写为一个函数，如下乳，<code>Abs</code>可以被写为一个常规的方法</p>

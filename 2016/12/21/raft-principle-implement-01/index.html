@@ -84,21 +84,21 @@
 
 
 
-<meta name="description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
+<meta name="description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft原理与实现（一）：简介、选举与日志复制">
 <meta property="og:url" content="https://zivyu.github.io/2016/12/21/raft-principle-implement-01/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
+<meta property="og:description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_state_machine.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_state_transitions.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_term.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_log.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_log_inconsistencies.png">
-<meta property="og:updated_time" content="2017-01-13T09:42:28.787Z">
+<meta property="og:updated_time" content="2017-01-13T09:50:53.726Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft原理与实现（一）：简介、选举与日志复制">
-<meta name="twitter:description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
+<meta name="twitter:description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
 <meta name="twitter:image" content="https://zivyu.github.io/images/raft_state_machine.png">
 
 
@@ -360,10 +360,6 @@
           
 
           
-              <div class="post-description">
-                  Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...
-              </div>
-          
 
         </div>
       </header>
@@ -377,6 +373,7 @@
 
       
         <h2 id="Raft是什么"><a href="#Raft是什么" class="headerlink" title="Raft是什么"></a>Raft是什么</h2><p>Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一致性的约束来减少需要考虑的状态数目。</p>
+<a id="more"></a>
 <h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>一致性算法允许一组机器一起工作来应对某些机器宕机。在过去十来年，Paxos一直在这方面占主导地位：许多实现都是基于Paxos，或受Paxos的影响。但是，Paxos实在是太难懂了，此外，还需要一些复杂的改变来支持实际的应用。</p>
 <p>在与Paxos做了一番斗争之后，我们提出了一个新的一致性算法，这个算法就叫Raft，并且它的首先目标就是要容易理解。</p>
 <p>Raft有几个特性：</p>
