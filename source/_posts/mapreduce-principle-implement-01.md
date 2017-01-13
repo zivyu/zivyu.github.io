@@ -1,7 +1,6 @@
 ---
 title: MapReduce原理与实现（一）：基本原理
 date: 2017-01-05 10:37:08
-description: MapReduce是用来处理大数据的一个编程模型。用户一般规定了map方法来处理一个k/v对，而reduce方法来合并相关的中间值。计算任务以k/v对的集合作为输入，并产生另外的k/v集合作为输出。用户通过Map和Reduce方法来控制计算。...
 categories:
 - 分布式学习
 tags:
@@ -15,6 +14,8 @@ tags:
 MapReduce是用来处理大数据的一个编程模型。
 
 用户一般规定了*map*方法来处理一个k/v对，而*reduce*方法来合并相关的中间值。
+
+<!-- more -->
 
 ## Programming Model
 

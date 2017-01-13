@@ -1,7 +1,6 @@
 ---
 title: MapReduce原理与实现（二）：MapReduce的实现
 date: 2017-01-12 14:05:19
-description: 在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...
 categories:
 - 分布式学习
 tags:
@@ -12,7 +11,7 @@ tags:
 
 ## 概览
 
-在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：...
+在实现MapReduce的过程中，主要是实现一个MapReduce框架。这个框架是干嘛的呢？具体来说，就是使用者只需要定义自己的Map和Reduce方法，即可完成MapReduce功能。如下所示：
 
 如下所示：
 	
@@ -23,6 +22,7 @@ tags:
 	            |   |   |
 	                |   -> Reduce -> c,2
 	                -----> Reduce -> b,2
+<!-- more -->
 
 主要逻辑如下：
 

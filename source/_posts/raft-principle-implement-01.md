@@ -1,7 +1,6 @@
 ---
 title: Raft原理与实现（一）：简介、选举与日志复制
 date: 2016-12-21 22:45:37
-description: Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...
 categories:
 - Raft原理与实现
 tags:
@@ -12,6 +11,8 @@ tags:
 ## Raft是什么
 
 Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一致性的约束来减少需要考虑的状态数目。
+
+<!-- more -->
 
 ## Introduction
 

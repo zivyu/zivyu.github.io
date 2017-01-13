@@ -1,7 +1,6 @@
 ---
 title: A Tour of Go（一）：基本知识
 date: 2016-12-30 10:29:39
-description: 在正式开始Mit 6.824之前，我先按照[A Tour of Go](https://golang.org/doc/#go_tour) ，学习Go语言的语法和相关知识。A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。...
 categories:
 - Go语言
 tags:
@@ -14,6 +13,8 @@ tags:
 A Tour of Go分为三个章节。第一个章节描述了基本的语法和数据结构，第二个章节讨论了方法和接口，第三个章节介绍了Go语言的并发原语。
 
 本节描述了Go语言的一些基本知识。包括变量声明，方法调用，以及一些其他的知识。
+
+<!-- more -->
 
 ## Hello,world!
 
