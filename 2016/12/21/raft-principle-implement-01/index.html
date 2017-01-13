@@ -84,21 +84,21 @@
 
 
 
-<meta name="description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
+<meta name="description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft原理与实现（一）：简介、选举与日志复制">
 <meta property="og:url" content="https://zivyu.github.io/2016/12/21/raft-principle-implement-01/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
+<meta property="og:description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_state_machine.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_state_transitions.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_term.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_log.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_log_inconsistencies.png">
-<meta property="og:updated_time" content="2016-12-27T01:56:50.851Z">
+<meta property="og:updated_time" content="2017-01-13T09:42:28.787Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft原理与实现（一）：简介、选举与日志复制">
-<meta name="twitter:description" content="Raft是什么Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。而Raft直接提出了实现该协议的几个要素：leader选举、日志复制和安全性，甚至给出了伪代码。相比Paxos，Raft通过加强对状态一">
+<meta name="twitter:description" content="Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...">
 <meta name="twitter:image" content="https://zivyu.github.io/images/raft_state_machine.png">
 
 
@@ -360,6 +360,10 @@
           
 
           
+              <div class="post-description">
+                  Raft是来管理复制日志的一个一致性协议。它和（multi-）Paxos有一样的效果，但是它的结构却和Paxos有所不同。简单点来说，它比Paxos更容易理解，也更容易实现。相信读过Paxos的读者已经体会过Paxos的晦涩、难懂，以及难以实现之处。...
+              </div>
+          
 
         </div>
       </header>
@@ -596,7 +600,7 @@
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>

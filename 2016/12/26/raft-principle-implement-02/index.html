@@ -84,23 +84,20 @@
 
 
 
-<meta name="description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。
-Election restrictionRaft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的le">
+<meta name="description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Raft原理与实现（二）：安全性与成员变更">
 <meta property="og:url" content="https://zivyu.github.io/2016/12/26/raft-principle-implement-02/index.html">
 <meta property="og:site_name" content="DanDan的学习笔记">
-<meta property="og:description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。
-Election restrictionRaft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的le">
+<meta property="og:description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_safy_r.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_safy_02.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_member_change_01.png">
 <meta property="og:image" content="https://zivyu.github.io/images/raft_member_change02.png">
-<meta property="og:updated_time" content="2016-12-29T07:39:16.087Z">
+<meta property="og:updated_time" content="2017-01-13T09:42:40.200Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Raft原理与实现（二）：安全性与成员变更">
-<meta name="twitter:description" content="Safety之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。
-Election restrictionRaft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的le">
+<meta name="twitter:description" content="之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...">
 <meta name="twitter:image" content="https://zivyu.github.io/images/raft_safy_r.png">
 
 
@@ -362,6 +359,10 @@ Election restrictionRaft使用一个简单的方法，它保证了之前term的�
           
 
           
+              <div class="post-description">
+                  之前的章节描述了Raft的leader选举和日志复制。但是如果按照之前的方式来，会有一些问题。比如说follower当选为leader之后可能会重写已经被commit的log，这样就会导致不同server的状态机执行了不同的command。Raft使用一个简单的方法，它保证了之前term的所有被committed entries，在新当选的leader都存在。...
+              </div>
+          
 
         </div>
       </header>
@@ -555,7 +556,7 @@ Election restrictionRaft使用一个简单的方法，它保证了之前term的�
           
             <div class="site-state-item site-state-categories">
               <a href="/categories">
-                <span class="site-state-item-count">5</span>
+                <span class="site-state-item-count">4</span>
                 <span class="site-state-item-name">分类</span>
               </a>
             </div>
